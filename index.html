@@ -226,7 +226,7 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#imaging-measurement" class="toc-h1 toc-link" data-title="Imaging Measurement">Imaging Measurement</a>
+            <a href="#measurement" class="toc-h1 toc-link" data-title="Measurement">Measurement</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-and-update-measurement-record" class="toc-h2 toc-link" data-title="Create and Update Measurement Record">Create and Update Measurement Record</a>
@@ -249,7 +249,7 @@
               </ul>
           </li>
           <li>
-            <a href="#judi-form" class="toc-h1 toc-link" data-title="Judi Form">Judi Form</a>
+            <a href="#form" class="toc-h1 toc-link" data-title="Form">Form</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-weasis-related-form-questions" class="toc-h2 toc-link" data-title="Get Weasis Related Form Questions">Get Weasis Related Form Questions</a>
@@ -274,7 +274,7 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to AG Mednet Judi Imaging and Form API. <br />
   You can use our API to access Judi Imaging Measurement API endpoints, which can save and get information on imaging measurements. <br />
-  You also can use our API to access Judi Form API endpoints, which can get information about form questions and save form answers to our database.</p>
+  You can also use our API to access Judi Form API endpoints, which can get information about form questions and save form answers to our database.</p>
 
 <p>We have language bindings in Java and shell! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 <h1 id='authentication'>Authentication</h1>
@@ -312,7 +312,7 @@ curl <span class="s2">"WeasisMeasurements.url"</span>
 <aside class="notice">
 You must replace <code>cookie</code> / <code>cookie key</code> with your personal API key.
 </aside>
-<h1 id='imaging-measurement'>Imaging Measurement</h1><h2 id='create-and-update-measurement-record'>Create and Update Measurement Record</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"/weasismeasurements"</span>
+<h1 id='measurement'>Measurement</h1><h2 id='create-and-update-measurement-record'>Create and Update Measurement Record</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"/weasismeasurements"</span>
 <span class="n">URl</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">WeasisMeasurements</span><span class="o">.</span><span class="na">url</span><span class="o">);</span>
 <span class="c1">// Connect to the web service and read the response.</span>
 <span class="n">HttpsURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
@@ -389,7 +389,7 @@ curl <span class="o">=</span> <span class="s2">"https://test-1g.agmednet.net/api
 </tbody></table>
 
 <aside class="notice">
-  Body data is JSON structured and should be passed as test string.
+  Data is JSON structured.
 </aside>
 <h2 id='get-a-specific-measurement-record-by-rest-id'>Get a Specific Measurement Record by Rest ID</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"/weasismeasurements/{restId}"</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://test-1g.agmednet.net/api/weasismeasurements/FBYVKDH4"</span><span class="o">);</span>
@@ -433,7 +433,7 @@ curl <span class="o">=</span> <span class="s2">"http://test-1g.agmednet.net/api/
 </aside>
 
 <blockquote>
-<p>An example of return object has JSON structure as: </p>
+<p>An example of a return object has JSON structure as: </p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62990033</span><span class="p">,</span><span class="w">
@@ -557,7 +557,7 @@ curl <span class="s2">"https://test-1g.agmednet.net/api/weasismeasurements/study
 </tbody></table>
 <h3 id='success-response'>Success Response</h3>
 <blockquote>
-<p>An example of return object has JSON structure as: </p>
+<p>An example of a return object has JSON structure as: </p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62968033</span><span class="p">,</span><span class="w">
@@ -674,12 +674,10 @@ curl <span class="s2">"https://test-1g.agmednet.net/api/weasismeasurements/study
   This API call retrives a list of weasis measurement objects. 
 </aside>
 
-<aside class="notice"> 
-  Structure of weasis measurement object demonstrates below:  
-</aside>
+<p>Structure of weasis measurement object demonstrates below:  </p>
 
 <blockquote>
-<p>An example of return obect has JSON structure as:</p>
+<p>An example of a return obect has JSON structure as:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -925,7 +923,7 @@ curl <span class="s2">"https://test-1g.agmednet.net/api/weasismeasurements/userr
 <td>If the user has permission to make measurements</td>
 </tr>
 </tbody></table>
-<h1 id='judi-form'>Judi Form</h1><h2 id='get-weasis-related-form-questions'>Get Weasis Related Form Questions</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId/weasisuser"</span>
+<h1 id='form'>Form</h1><h2 id='get-weasis-related-form-questions'>Get Weasis Related Form Questions</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId/weasisuser"</span>
 
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser"</span><span class="o">);</span>
 <span class="c1">// Connect to the web service and read the response.</span>
@@ -1133,16 +1131,8 @@ curl <span class="s2">"https://test-1g.agmednet.net/api/weasismeasurements/usera
 <td>Not Found -- The requested recource is not available.</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
 <td>500</td>
 <td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
