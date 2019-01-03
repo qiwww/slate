@@ -18,7 +18,7 @@ search: true
 # Introduction
   Welcome to AG Mednet Judi Imaging and Form API. <br />
   You can use our API to access Judi Imaging Measurement API endpoints, which can save and get information on imaging measurements. <br />
-  You also can use our API to access Judi Form API endpoints, which can get information about form questions and save form answers to our database.
+  You can also use our API to access Judi Form API endpoints, which can get information about form questions and save form answers to our database.
 
 We have language bindings in Java and shell! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
@@ -63,7 +63,7 @@ You must replace <code>cookie</code> / <code>cookie key</code> with your persona
 </aside>
 
 
-# Imaging Measurement
+# Measurement
 
 ## Create and Update Measurement Record
 
@@ -127,7 +127,7 @@ userRole | text | N/A | user role's role name
 
 
 <aside class="notice">
-  Body data is JSON structured and should be passed as test string.
+  Data is JSON structured.
 </aside>
 
 
@@ -180,7 +180,7 @@ restId | The rest ID of the measurement record to retrieve
   returns weasis measurement object
 </aside>
 
-> An example of return object has JSON structure as: 
+> An example of a return object has JSON structure as: 
 
 ```json
 {
@@ -254,7 +254,7 @@ userRole | text | The role name of the user role
 
 ### Success Response 
 
-> An example of return object has JSON structure as: 
+> An example of a return object has JSON structure as: 
 
 ```json
 {
@@ -330,11 +330,9 @@ studyId | integer | The ID of the study
   This API call retrives a list of weasis measurement objects. 
 </aside>
 
-<aside class="notice"> 
-  Structure of weasis measurement object demonstrates below:  
-</aside>
+Structure of weasis measurement object demonstrates below:  
 
-> An example of return obect has JSON structure as:
+> An example of a return obect has JSON structure as:
 
 ```json
 [
@@ -518,7 +516,7 @@ weasisUser | text | false | If the user has permission to make measurements
 
 
 
-# Judi Form
+# Form
 
 ## Get Weasis Related Form Questions 
 
