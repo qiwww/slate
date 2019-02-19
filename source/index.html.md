@@ -52,7 +52,7 @@ curl "WeasisMeasurements.url"
 
 > Make sure to replace `cookie` with your API key.
 
-AG Mednet uses cookie header to allow access to the API. You can register as an AG Mednet user at our [developer portal](https://test-1g.agmednet.net).
+AG Mednet uses cookie header to allow access to the API. You can register as an AG Mednet user at our [developer portal](https://demo01.agmednet.net).
 
 We expect for the API key to be included in all API requests to the server in a header that looks like the following:
 
@@ -90,7 +90,7 @@ osw.write(json);
 ```shell
 API = "/weasismeasurements"
 
-curl = "https://test-1g.agmednet.net/api/weasismeasurements"
+curl = "https://demo01.agmednet.net/api/weasismeasurements"
 -H "Authorization:cookie"
 ```
 > Make sure to replace `cookie` with your API key.
@@ -102,7 +102,7 @@ This endpoint creates or updates a measurement record in database: weasis_measur
 
 
 ### Sample Call
-`POST https://test-1g.agmednet.net/api/weasismeasurements`
+`POST https://demo01.agmednet.net/api/weasismeasurements`
 
 
 ### Data Parameters
@@ -136,7 +136,7 @@ userRole | text | N/A | user role's role name
 
 ```java
 API = "/weasismeasurements/{restId}"
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/FBYVKDH4");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/FBYVKDH4");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -150,7 +150,7 @@ conn.connect();
 ```shell
 API = "/weasismeasurements/{restId}"
 
-curl = "http://test-1g.agmednet.net/api/weasismeasurements/FBYVKDH4"
+curl = "http://demo01.agmednet.net/api/weasismeasurements/FBYVKDH4"
 -H "Authorization: cookie"
 ```
 
@@ -164,7 +164,7 @@ This endpoint retrieves a specific measurement record in weasis_measurement tabl
 `GET https://example.com/weasismeasurements/{restId}`
 
 ### Sample call
-`Get https://test-1g.agmednet.net/api/weasismeasurements/FBYVKDH4`
+`Get https://demo01.agmednet.net/api/weasismeasurements/FBYVKDH4`
 
 
 ### URL Parameters
@@ -214,7 +214,7 @@ invalidInput | text | null | Invalid input
 ```java
 API = "weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}"
 
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -228,7 +228,7 @@ conn.connect();
 ```shell
 api = "weasismeasurements/study/{studyId}/usseraccount/{userAccountId}/userrole/{userRole}"
 
-curl "https://test-1g.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair"
+curl "https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair"
   -H "Authorization: cookie"
 ```
 
@@ -241,7 +241,7 @@ This endpoint retrieves a speicific measurement record by given study id, user a
 `GET http://example.com/weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}`
 
 ### Sample Call
-`GET https://test-1g.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair`
+`GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair`
 
 ### URL Parameters
 
@@ -287,7 +287,7 @@ invalidInput | text | null | Invalid input
 ```java
 API = "weasismeasurements/study/{studyId}"
 
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/study/756788442");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -301,7 +301,7 @@ conn.connect();
 ```shell
 API = "weasismeasurements/study/{studyId}"
 
-curl "https://test-1g.agmednet.net/api/weasismeasurements/study/756788442"
+curl "https://demo01.agmednet.net/api/weasismeasurements/study/756788442"
   -H "Authorization: cookie"
 ```
 
@@ -314,7 +314,7 @@ This endpoint retrieves a list of measurement records by given study id.
 
 ### Sample Call
 
-`GET https://test-1g.agmednet.net/api/weasismeasurements/study/756788442`
+`GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442`
 
 
 ### URL Parameters
@@ -413,7 +413,7 @@ invalidInput | text | null | Invalid input
 ```java
 API = "weasismeasurements/study/{studyId}"
 
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/study/756788442");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -427,7 +427,7 @@ conn.connect();
 ```shell
 api = "weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}/userstatues"
 
-curl "https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues"
+curl "https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues"
   -H "Authorization: cookie"
 ```
 
@@ -446,7 +446,7 @@ This endpoint retrieves the value of true or false if a user has permission to v
 
 ### Sample Call
 
-`GET https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues`
+`GET https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues`
 
 ### URL Parameters
 
@@ -466,7 +466,7 @@ privilegeUser | text | false | If the user has permission to view all related me
 ```java
 API = "weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId/weasisuser"
 
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -480,7 +480,7 @@ conn.connect();
 ```shell
 api = "weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}/weasisuser"
 
-curl "https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser"
+curl "https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser"
   -H "Authorization: cookie"
 ```
 
@@ -499,7 +499,7 @@ This endpoint retrieves the value of true or false if a user has permission to m
 
 ### Sample Call
 
-`GET https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser`
+`GET https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser`
 
 ### URL Parameters
 
@@ -523,7 +523,7 @@ weasisUser | text | false | If the user has permission to make measurements
 ```java
 API = "weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId/weasisuser"
 
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -537,7 +537,7 @@ conn.connect();
 ```shell
 api = "weasismeasurements/eventinstance/{eventInstanceRestId}/userrole/{userRole}"
 
-curl "https://test-1g.agmednet.net/api/weasismeasurements/eventinstance/1Q45G9KL/userrole/committeeChair"
+curl "https://demo01.agmednet.net/api/weasismeasurements/eventinstance/1Q45G9KL/userrole/committeeChair"
   -H "Authorization: cookie"
 ```
 
@@ -560,7 +560,7 @@ This endpoint retrieves a list of form questions required Weasis to answer by gi
 
 ### HTTP Request
 
-`POST http://example.com/api/weasismeasurements/eventinstance/{eventInstanceRestId}/userrole/{userRole}`
+`GET http://example.com/api/weasismeasurements/eventinstance/{eventInstanceRestId}/userrole/{userRole}`
 
 ### URL Parameters
 
@@ -589,7 +589,7 @@ invalidInput | text | null | Invalid input
 ```java
 API = "weasismeasurements/study/{studyId}"
 
-URL url = new URL("https://test-1g.agmednet.net/api/weasismeasurements/study/756788442");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -603,7 +603,7 @@ conn.connect();
 ```shell
 api = "weasismeasurements/useraccount/{userAccountId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}"
 
-curl "https://test-1g.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair"
+curl "https://demo01.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair"
   -H "Authorization: cookie"
 ```
 
@@ -616,7 +616,7 @@ This endpoint creats or updates form question result by given user account id, u
 
 ### Sample Call
 
-`POST https://test-1g.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair`
+`POST https://demo01.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair`
 
 
 ### URL Parameters
