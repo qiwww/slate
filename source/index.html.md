@@ -209,7 +209,7 @@ userRole | text | N/A | The user role name of the current user
 invalidInput | text | null | Invalid input
 
 
-## Get a Specific Measurement Record by Study ID, User Account ID and User Role
+## Get a Specific Measurement Record by Study ID and User Role
 
 ```java
 API = "weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}"
@@ -226,7 +226,7 @@ conn.connect();
 ```
 
 ```shell
-api = "weasismeasurements/study/{studyId}/usseraccount/{userAccountId}/userrole/{userRole}"
+api = "weasismeasurements/study/{studyId}/userrole/{userRole}"
 
 curl "https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair"
   -H "Authorization: cookie"
@@ -248,7 +248,6 @@ This endpoint retrieves a speicific measurement record by given study id, user a
 Parameter | Type | Description
 --------- | ---- | -----------
 studyId | integer | The ID of the study
-userAccountId | integer | The ID of the user account
 userRole | text | The role name of the user role
 
 
@@ -642,7 +641,7 @@ eventInstanceRestId | text | The rest ID of the event instacne
    "phase": 1,
    "invalidInput": null
 }
-
+ss
 ```
 
 Parameter | Type | Default | Description
