@@ -212,9 +212,9 @@ invalidInput | text | null | Invalid input
 ## Get a Specific Measurement Record by Study ID and User Role
 
 ```java
-API = "weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}"
+API = "weasismeasurements/study/{studyId}/userrole/{userRole}"
 
-URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -234,14 +234,14 @@ curl "https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useracc
 
 
 
-This endpoint retrieves a speicific measurement record by given study id, user account id and user role name.
+This endpoint retrieves a speicific measurement record by given study id and user role name, based on user account id in the system.
 
 ### HTTP Request
 
-`GET http://example.com/weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}`
+`GET http://example.com/weasismeasurements/study/{studyId}/userrole/{userRole}`
 
 ### Sample Call
-`GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair`
+`GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair`
 
 ### URL Parameters
 
@@ -586,9 +586,9 @@ invalidInput | text | null | Invalid input
 ## Create and Update Form Question Result
 
 ```java
-API = "weasismeasurements/study/{studyId}"
+API = "weasismeasurements/userrole/{userrole}/eventinstance/{eventInstanceRestId}"
 
-URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -600,9 +600,9 @@ conn.connect();
 ```
 
 ```shell
-api = "weasismeasurements/useraccount/{userAccountId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}"
+api = "weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}"
 
-curl "https://demo01.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair"
+curl "https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair"
   -H "Authorization: cookie"
 ```
 
@@ -611,11 +611,11 @@ This endpoint creats or updates form question result by given user account id, u
 
 ### HTTP Request
 
-`POST http://example.com/api/weasismeasurements/useraccount/{userAccountId}/userrole/{userRole}eventinstance/{eventInstanceRestId}`
+`POST http://example.com/api/weasismeasurements/userrole/{userRole}eventinstance/{eventInstanceRestId}`
 
 ### Sample Call
 
-`POST https://demo01.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair`
+`POST https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL`
 
 
 ### URL Parameters
