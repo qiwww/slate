@@ -611,7 +611,7 @@ This endpoint creats or updates form question result by given user account id, u
 
 ### HTTP Request
 
-`POST http://example.com/api/weasismeasurements/userrole/{userRole}eventinstance/{eventInstanceRestId}`
+`POST http://example.com/api/weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}`
 
 ### Sample Call
 
