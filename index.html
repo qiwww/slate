@@ -510,9 +510,9 @@ curl <span class="o">=</span> <span class="s2">"http://demo01.agmednet.net/api/w
 <td>Invalid input</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-specific-measurement-record-by-study-id-and-user-role'>Get a Specific Measurement Record by Study ID and User Role</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}"</span>
+<h2 id='get-a-specific-measurement-record-by-study-id-and-user-role'>Get a Specific Measurement Record by Study ID and User Role</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/study/{studyId}/userrole/{userRole}"</span>
 
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair"</span><span class="o">);</span>
 <span class="c1">// Connect to the web service and read the response.</span>
 <span class="n">HttpsURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
@@ -526,11 +526,11 @@ curl <span class="o">=</span> <span class="s2">"http://demo01.agmednet.net/api/w
 curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair"</span>
   -H <span class="s2">"Authorization: cookie"</span>
 </code></pre>
-<p>This endpoint retrieves a speicific measurement record by given study id, user account id and user role name.</p>
+<p>This endpoint retrieves a speicific measurement record by given study id and user role name, based on user account id in the system.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET http://example.com/weasismeasurements/study/{studyId}/useraccount/{userAccountId}/userrole/{userRole}</code></p>
+<p><code>GET http://example.com/weasismeasurements/study/{studyId}/userrole/{userRole}</code></p>
 <h3 id='sample-call-3'>Sample Call</h3>
-<p><code>GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/useraccount/718789438/userrole/committeeChair</code></p>
+<p><code>GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1007,9 +1007,9 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/eventi
 <aside class="notice">
   Form question name is unique. You could consider it as ID.
 </aside>
-<h2 id='create-and-update-form-question-result'>Create and Update Form Question Result</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/study/{studyId}"</span>
+<h2 id='create-and-update-form-question-result'>Create and Update Form Question Result</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/userrole/{userrole}/eventinstance/{eventInstanceRestId}"</span>
 
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL"</span><span class="o">);</span>
 <span class="c1">// Connect to the web service and read the response.</span>
 <span class="n">HttpsURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
@@ -1018,16 +1018,16 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/eventi
 <span class="c1">// Add coolies to the request</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Cookie"</span> <span class="o">,</span> <span class="n">cookie</span><span class="o">);</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
-</code></pre><pre class="highlight shell tab-shell"><code>api <span class="o">=</span> <span class="s2">"weasismeasurements/useraccount/{userAccountId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>api <span class="o">=</span> <span class="s2">"weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}"</span>
 
-curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair"</span>
+curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair"</span>
   -H <span class="s2">"Authorization: cookie"</span>
 </code></pre>
 <p>This endpoint creats or updates form question result by given user account id, user role and event instance rest id.</p>
 <h3 id='http-request-8'>HTTP Request</h3>
-<p><code>POST http://example.com/api/weasismeasurements/useraccount/{userAccountId}/userrole/{userRole}eventinstance/{eventInstanceRestId}</code></p>
+<p><code>POST http://example.com/api/weasismeasurements/userrole/{userRole}eventinstance/{eventInstanceRestId}</code></p>
 <h3 id='sample-call-7'>Sample Call</h3>
-<p><code>POST https://demo01.agmednet.net/api/weasismeasurements/useraccount/717242438/userrole/committeeChaireventinstance/1Q45G9KL/userrole/committeeChair</code></p>
+<p><code>POST https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL</code></p>
 <h3 id='url-parameters-7'>URL Parameters</h3>
 <table><thead>
 <tr>
