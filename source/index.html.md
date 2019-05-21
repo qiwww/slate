@@ -120,10 +120,13 @@ This endpoint creates or updates a measurement record in database: weasis_measur
 
 Parameter | type | Default | Description
 --------- | ------ | ------- | -----------
-value | text | N/A | measurement graphics in text format 
+formId | integer | N/A | form ID
 studyId | integer | N/A | study ID
-userAccountId | integer | N/A | user account ID
 userRole | text | N/A | user role's role name
+measurementValue | text | N/A | measurements in text format
+questionAnswerMap | text | N/A | map of question names and question answers in text format
+phase | integer | N/A | phase of the event 
+invalidInput | text | error message
 
 
 <aside class="notice">
