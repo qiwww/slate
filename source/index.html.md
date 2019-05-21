@@ -131,6 +131,75 @@ userRole | text | N/A | user role's role name
 </aside>
 
 
+## Create and Update Measurement Record and Form Answers
+
+```java
+API = "/weasismeasurements/eventinstance/{eventInstanceRestId}"
+URl url = new URL(WeasisMeasurements.url);
+// Connect to the web service and read the response.
+HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+conn.setDoOutput(true);
+conn.setRequestProperty("Content-Type", "application/json");
+conn.setRequestionMethod("POST");
+// Add coolies to the request
+conn.setRequestProperty("Cookie" , cookie);
+conn.connect();
+
+// Construct a JSON object to String "json"
+
+// Pass String "json" to connection
+OutputStream os = conn.getOutputStream();
+OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+osw.write(json);
+```
+
+```shell
+API = "/weasismeasurements/eventinstance/{eventInstanceRestId}"
+
+curl = "https://demo01.agmednet.net/api/weasismeasurements/eventinstance/SDFLJFI"
+-H "Authorization:cookie"
+```
+> Make sure to replace `cookie` with your API key.
+
+This endpoint creates or updates a measurement record in database: weasis_measurement table.
+
+### HTTP Request
+`POST https://example.com/weasismeasurements/eventinstance/{eventInstanceRestId}`
+
+
+### Sample Call
+`POST https://demo01.agmednet.net/api/weasismeasurements/eventinstance/SDFLJFI`
+
+
+### Data Parameters
+
+> An example of data object has JSON structured like this:
+
+```json
+  {
+    "formId" : 2348232343,
+    "studyId" : 734515440,
+    "userRole" : "Adjudicator",
+    "measurementValue": "<graphicList>\r\n  <rectangle handle_pts_nb=\"8\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"717242438\" form_question_name=\"anotherWeasisQuestion\" form_question=\"Another Weasis Question\">\r\n     <pts class=\"java.util.ArrayList\">\r\n        <pt x=\"363.0012162490878\" y=\"218.21624908781317\"\/>\r\n        <pt x=\"406.29968377523716\" y=\"223.56774507419118\"\/>\r\n        <pt x=\"406.29968377523716\" y=\"218.21624908781317\"\/>\r\n        <pt x=\"363.0012162490878\" y=\"223.56774507419118\"\/>\r\n        <pt x=\"384.6504500121625\" y=\"218.21624908781317\"\/>\r\n        <pt x=\"384.6504500121625\" y=\"223.56774507419118\"\/>\r\n        <pt x=\"406.29968377523716\" y=\"220.89199708100216\"\/>\r\n        <pt x=\"363.0012162490878\" y=\"220.89199708100216\"\/>\r\n     <\/pts>\r\n     <paint class=\"java.awt.Color\" rgb=\"ffff00\"\/>\r\n     <label offsetX=\"0.0\" offsetY=\"0.0\"\/>\r\n  <\/rectangle>\r\n  <line handle_pts_nb=\"2\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"717242438\" form_question_name=\"weasisLength\" form_question=\"Length of Something*\" form_answer=\"Length : 323.1 pix\">\r\n     <pts class=\"java.util.ArrayList\">\r\n        <pt x=\"157.69837022622232\" y=\"92.2128435903673\"\/>\r\n        <pt x=\"479.7611286791535\" y=\"118.48382388713208\"\/>\r\n     <\/pts>\r\n     <paint class=\"java.awt.Color\" rgb=\"ffff00\"\/>\r\n     <label offsetX=\"0.0\" offsetY=\"0.0\"\/>\r\n  <\/line>\r\n  <threePointsCircle handle_pts_nb=\"3\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"717242438\" form_question_name=\"weasisArea\" form_question=\"Area of something?\" form_answer=\"Area : 5,763.4 pix\">\r\n     <pts class=\"java.util.ArrayList\">\r\n        <pt x=\"148.9413767939674\" y=\"166.16078812940887\"\/>\r\n        <pt x=\"188.34784723911457\" y=\"230.378739965945\"\/>\r\n        <pt x=\"210.72683045487716\" y=\"222.5947458039406\"\/>\r\n     <\/pts>\r\n     <paint class=\"java.awt.Color\" rgb=\"ffff00\"\/>\r\n     <label offsetX=\"0.0\" offsetY=\"0.0\"\/>\r\n  <\/threePointsCircle>\r\n<\/graphicList>",
+    "questioinAnswerMap" : "{\"Area of something?\" : \"Area : 5,763.4 pix\"; \"weasisLength\": \"Length : 323.1 pix\"}"
+    "phase" : 1,
+    "invalideInput" : null
+  }
+```
+
+Parameter | type | Default | Description
+--------- | ------ | ------- | -----------
+value | text | N/A | measurement graphics in text format 
+studyId | integer | N/A | study ID
+userAccountId | integer | N/A | user account ID
+userRole | text | N/A | user role's role name
+
+
+<aside class="notice">
+  Data is JSON structured.
+</aside>
+
+
 
 ## Get a Specific Measurement Record by Rest ID
 
@@ -407,12 +476,11 @@ userLastName | text | N/A | The last name of the user account
 userRole | text | N/A | The user role name of the current user
 invalidInput | text | null | Invalid input
 
-## Get if A User Is Weasis Privilege User
-
+## Get Measurements Based on User Status
 ```java
-API = "weasismeasurements/study/{studyId}"
+API = "weasismeasurements/study/{studyId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}"
 
-URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442");
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/eventinstance/DSDIJL2");
 // Connect to the web service and read the response.
 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 conn.setDoOutput(true);
@@ -424,9 +492,135 @@ conn.connect();
 ```
 
 ```shell
-api = "weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}/userstatues"
+api = "weasismeasurements/study/{studyId}/userrole/{userRole}/userstatus"
 
-curl "https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues"
+curl "https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/eventinstance/DSDIJL2"
+  -H "Authorization: cookie"
+```
+This endpoint retrieves a list of measurement records by given study id.
+
+### HTTP Request
+
+`GET http://example.com/weasismeasurements/study/{studyId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}`
+
+### Sample Call
+
+`GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/eventinstance/DSDIJL2`
+
+
+### URL Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+studyId | integer | The ID of the study
+userRole | text | The name of the user role
+eventInstanceRestId | text | The rest ID of the event instance
+
+
+### Success Response:
+
+<aside class="success">
+  This API call retrives a list of weasis measurement objects. 
+</aside>
+
+Structure of weasis measurement object demonstrates below:  
+
+> An example of a return obect has JSON structure as:
+
+```json
+[
+    {
+        "id": 62968033,
+        "restId": "X08MVTY9",
+        "value": "<graphicList>\n   <ellipse handle_pts_nb=\"8\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"2000\" user_role=\"reviewer\" form_question_name=\"cevaComments\" form_question=\"Area of something?\" form_answer=\"Area : 8,656 mm2\">\n      <pts class=\"java.util.ArrayList\">\n         <pt x=\"191.74529667149056\" y=\"352.96092619392186\"/>\n         <pt x=\"428.50361794500725\" y=\"435.739507959479\"/>\n         <pt x=\"428.50361794500725\" y=\"352.96092619392186\"/>\n         <pt x=\"191.74529667149056\" y=\"435.739507959479\"/>\n         <pt x=\"310.1244573082489\" y=\"352.96092619392186\"/>\n         <pt x=\"310.1244573082489\" y=\"435.739507959479\"/>\n         <pt x=\"428.50361794500725\" y=\"394.35021707670046\"/>\n         <pt x=\"191.74529667149056\" y=\"394.35021707670046\"/>\n      </pts>\n      <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>\n      <label offsetX=\"0.0\" offsetY=\"0.0\"/>\n   </ellipse>\n   <line handle_pts_nb=\"2\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"2000\" user_role=\"reviewer\" form_question_name=\"cevaReviewer\" form_question=\"Length of Something*\" form_answer=\"Length : 292.7 mm\">\n      <pts class=\"java.util.ArrayList\">\n         <pt x=\"206.21707670043412\" y=\"225.0303907380608\"/>\n         <pt x=\"452.2373371924747\" y=\"66.41968162083937\"/>\n      </pts>\n      <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>\n      <label offsetX=\"0.0\" offsetY=\"0.0\"/>\n   </line>\n</graphicList>",
+        "studyId": 59602037,
+        "userAccountId": 2000,
+        "userFirstName": "The",
+        "userLastName": "Reviewer",
+        "userRole": "reviewer",
+        "invalidInput": null
+    },
+    {
+        "id": 63107033,
+        "restId": "HZ4JX49G",
+        "value": "<graphicList>\n   <line handle_pts_nb=\"2\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"2041002\" user_role=\"committeeChair\" form_question_name=\"cevaReviewer\" form_question=\"Length of Something*\" form_answer=\"Length : 5.3 mm\">\n      <pts class=\"java.util.ArrayList\">\n         <pt x=\"32.84515195369028\" y=\"310.1244573082489\"/>\n         <pt x=\"33.71345875542692\" y=\"304.91461649782923\"/>\n      </pts>\n      <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>\n      <label offsetX=\"0.0\" offsetY=\"0.0\"/>\n   </line>\n</graphicList>",
+        "studyId": 59602037,
+        "userAccountId": 2041002,
+        "userFirstName": "Chair",
+        "userLastName": "Man",
+        "userRole": "committeeChair",
+        "invalidInput": null
+    },
+    {
+        "id": 61794033,
+        "restId": "2M6YL16G",
+        "value": "<graphicList>    <line handle_pts_nb=\"2\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"4000\" user_role=\"reviewer\" form_question_name=\"cevaReviewer\" form_question=\"Length of Something*\" form_answer=\"Length : 303.7 mm\">       <pts class=\"java.util.ArrayList\">          <pt x=\"112.43560057887117\" y=\"40.37047756874096\"/>          <pt x=\"433.13458755426916\" y=\"137.62083936324169\"/>       </pts>       <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>       <label offsetX=\"0.0\" offsetY=\"0.0\"/>    </line>    <rectangle handle_pts_nb=\"8\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"4000\" user_role=\"reviewer\" form_question_name=\"cevaComments\" form_question=\"Area of something?\" form_answer=\"Area : 15,238 mm2\">       <pts class=\"java.util.ArrayList\">          <pt x=\"183.06222865412445\" y=\"352.3820549927641\"/>          <pt x=\"348.61939218523884\" y=\"444.42257597684517\"/>          <pt x=\"348.61939218523884\" y=\"352.3820549927641\"/>          <pt x=\"183.06222865412445\" y=\"444.42257597684517\"/>          <pt x=\"265.84081041968165\" y=\"352.3820549927641\"/>          <pt x=\"265.84081041968165\" y=\"444.42257597684517\"/>          <pt x=\"348.61939218523884\" y=\"398.4023154848046\"/>          <pt x=\"183.06222865412445\" y=\"398.4023154848046\"/>       </pts>       <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>       <label offsetX=\"0.0\" offsetY=\"0.0\"/>    </rectangle> </graphicList>",
+        "studyId": 59602037,
+        "userAccountId": 4000,
+        "userFirstName": "Adjudicator",
+        "userLastName": "One",
+        "userRole": "reviewer",
+        "invalidInput": null
+    },
+    {
+        "id": 62512033,
+        "restId": "DW77S8FZ",
+        "value": "<graphicList>    <line handle_pts_nb=\"2\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"5000\" user_role=\"reviewer\" form_question_name=\"cevaReviewer\" form_question=\"Length of Something*\" form_answer=\"Length : 411 mm\">       <pts class=\"java.util.ArrayList\">          <pt x=\"63.814761215629495\" y=\"18.952243125904488\"/>          <pt x=\"459.18379160636755\" y=\"131.2532561505065\"/>       </pts>       <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>       <label offsetX=\"0.0\" offsetY=\"0.0\"/>    </line>    <rectangle handle_pts_nb=\"8\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"5000\" user_role=\"reviewer\" form_question_name=\"cevaComments\" form_question=\"Area of something?\" form_answer=\"Area : 1,574.9 mm2\">       <pts class=\"java.util.ArrayList\">          <pt x=\"245.00144717800285\" y=\"367.4327062228654\"/>          <pt x=\"273.94500723589005\" y=\"421.84659913169315\"/>          <pt x=\"273.94500723589005\" y=\"367.4327062228654\"/>          <pt x=\"245.00144717800285\" y=\"421.84659913169315\"/>          <pt x=\"259.47322720694643\" y=\"367.4327062228654\"/>          <pt x=\"259.47322720694643\" y=\"421.84659913169315\"/>          <pt x=\"273.94500723589005\" y=\"394.6396526772793\"/>          <pt x=\"245.00144717800285\" y=\"394.6396526772793\"/>       </pts>       <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>       <label offsetX=\"0.0\" offsetY=\"0.0\"/>    </rectangle> </graphicList>",
+        "studyId": 59602037,
+        "userAccountId": 5000,
+        "userFirstName": "Adjudicator",
+        "userLastName": "Two",
+        "userRole": "reviewer",
+        "invalidInput": null
+    },
+    {
+        "id": 62990033,
+        "restId": "QB3Q8QDY",
+        "value": "<graphicList>    <line handle_pts_nb=\"2\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"2041002\" user_role=\"reviewer\" form_question_name=\"cevaReviewer\" form_question=\"Length of Something*\" form_answer=\"Length : 195 mm\">       <pts class=\"java.util.ArrayList\">          <pt x=\"299.99421128798843\" y=\"189.14037626628075\"/>          <pt x=\"418.08393632416784\" y=\"34.00289435600579\"/>       </pts>       <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>       <label offsetX=\"0.0\" offsetY=\"0.0\"/>    </line>    <ellipse handle_pts_nb=\"8\" thickness=\"1.0\" fill=\"false\" label_visible=\"true\" class_id=\"0\" user_id=\"2041002\" user_role=\"reviewer\" form_question_name=\"cevaComments\" form_question=\"Area of something?\" form_answer=\"Area : 17,447.3 mm2\">       <pts class=\"java.util.ArrayList\">          <pt x=\"169.16931982633864\" y=\"302.5991316931983\"/>          <pt x=\"320.2547033285094\" y=\"449.63241678726484\"/>          <pt x=\"320.2547033285094\" y=\"302.5991316931983\"/>          <pt x=\"169.16931982633864\" y=\"449.63241678726484\"/>          <pt x=\"244.712011577424\" y=\"302.5991316931983\"/>          <pt x=\"244.712011577424\" y=\"449.63241678726484\"/>          <pt x=\"320.2547033285094\" y=\"376.11577424023153\"/>          <pt x=\"169.16931982633864\" y=\"376.11577424023153\"/>       </pts>       <paint class=\"java.awt.Color\" rgb=\"ffff00\"/>       <label offsetX=\"0.0\" offsetY=\"0.0\"/>    </ellipse> </graphicList>",
+        "studyId": 59602037,
+        "userAccountId": 2041002,
+        "userFirstName": "Chair",
+        "userLastName": "Man",
+        "userRole": "reviewer",
+        "invalidInput": null
+    }
+]
+
+```
+
+
+Parameter | Type | Default | Description 
+--------- | ---- | ------- | ------------
+id | integer | N/A | The ID of the measurement record
+restId | text | N/A | The rest ID of the measurement record
+value | text | N/A | The value of measurement 
+studyId | integer | N/A | The ID of the study
+userAccountId | integer | N/A | The ID of the user account
+userFirstName | text | N/A | The first name of the user account
+userLastName | text | N/A | The last name of the user account
+userRole | text | N/A | The user role name of the current user
+invalidInput | text | null | Invalid input
+
+## Get if A User Is Weasis Privilege User
+
+```java
+API = "weasismeasurements/study/{studyId}/userrole/{userRole}/userstatus"
+
+URL url = new URL("https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/adjudicator/userstatus");
+// Connect to the web service and read the response.
+HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+conn.setDoOutput(true);
+conn.setRequestProperty("Content-Type", "application/json");
+conn.setRequestionMethod("GET");
+// Add coolies to the request
+conn.setRequestProperty("Cookie" , cookie);
+conn.connect();
+```
+
+```shell
+api = "weasismeasurements/study/{studyId}/userrole/{userRole}/userstatus"
+
+curl "https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair/userstatus"
   -H "Authorization: cookie"
 ```
 
