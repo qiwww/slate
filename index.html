@@ -232,6 +232,9 @@
                     <a href="#create-and-update-measurement-record" class="toc-h2 toc-link" data-title="Create and Update Measurement Record">Create and Update Measurement Record</a>
                   </li>
                   <li>
+                    <a href="#create-and-update-measurement-record-and-form-answers" class="toc-h2 toc-link" data-title="Create and Update Measurement Record and Form Answers">Create and Update Measurement Record and Form Answers</a>
+                  </li>
+                  <li>
                     <a href="#get-a-specific-measurement-record-by-rest-id" class="toc-h2 toc-link" data-title="Get a Specific Measurement Record by Rest ID">Get a Specific Measurement Record by Rest ID</a>
                   </li>
                   <li>
@@ -239,6 +242,9 @@
                   </li>
                   <li>
                     <a href="#get-measurement-records-list-by-study-id" class="toc-h2 toc-link" data-title="Get Measurement Records List by Study ID">Get Measurement Records List by Study ID</a>
+                  </li>
+                  <li>
+                    <a href="#get-measurements-based-on-user-status" class="toc-h2 toc-link" data-title="Get Measurements Based on User Status">Get Measurements Based on User Status</a>
                   </li>
                   <li>
                     <a href="#get-if-a-user-is-weasis-privilege-user" class="toc-h2 toc-link" data-title="Get if A User Is Weasis Privilege User">Get if A User Is Weasis Privilege User</a>
@@ -363,6 +369,106 @@ curl <span class="o">=</span> <span class="s2">"https://demo01.agmednet.net/api/
 </tr>
 </thead><tbody>
 <tr>
+<td>formId</td>
+<td>integer</td>
+<td>N/A</td>
+<td>form ID</td>
+</tr>
+<tr>
+<td>studyId</td>
+<td>integer</td>
+<td>N/A</td>
+<td>study ID</td>
+</tr>
+<tr>
+<td>userRole</td>
+<td>text</td>
+<td>N/A</td>
+<td>user role&#39;s role name</td>
+</tr>
+<tr>
+<td>measurementValue</td>
+<td>text</td>
+<td>N/A</td>
+<td>measurements in text format</td>
+</tr>
+<tr>
+<td>questionAnswerMap</td>
+<td>text</td>
+<td>N/A</td>
+<td>map of question names and question answers in text format</td>
+</tr>
+<tr>
+<td>phase</td>
+<td>integer</td>
+<td>N/A</td>
+<td>phase of the event</td>
+</tr>
+<tr>
+<td>invalidInput</td>
+<td>text</td>
+<td>error message</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  Data is JSON structured.
+</aside>
+<h2 id='create-and-update-measurement-record-and-form-answers'>Create and Update Measurement Record and Form Answers</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"/weasismeasurements/eventinstance/{eventInstanceRestId}"</span>
+<span class="n">URl</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">WeasisMeasurements</span><span class="o">.</span><span class="na">url</span><span class="o">);</span>
+<span class="c1">// Connect to the web service and read the response.</span>
+<span class="n">HttpsURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setRequestionMethod</span><span class="o">(</span><span class="s">"POST"</span><span class="o">);</span>
+<span class="c1">// Add coolies to the request</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Cookie"</span> <span class="o">,</span> <span class="n">cookie</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+
+<span class="c1">// Construct a JSON object to String "json"</span>
+
+<span class="c1">// Pass String "json" to connection</span>
+<span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span>
+<span class="n">OutputStreamWriter</span> <span class="n">osw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">os</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">);</span>
+<span class="n">osw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
+</code></pre><pre class="highlight shell tab-shell"><code>API <span class="o">=</span> <span class="s2">"/weasismeasurements/eventinstance/{eventInstanceRestId}"</span>
+
+curl <span class="o">=</span> <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/eventinstance/SDFLJFI"</span>
+-H <span class="s2">"Authorization:cookie"</span>
+</code></pre>
+<blockquote>
+<p>Make sure to replace <code>cookie</code> with your API key.</p>
+</blockquote>
+
+<p>This endpoint creates or updates a measurement record in database: weasis_measurement table.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://example.com/weasismeasurements/eventinstance/{eventInstanceRestId}</code></p>
+<h3 id='sample-call-2'>Sample Call</h3>
+<p><code>POST https://demo01.agmednet.net/api/weasismeasurements/eventinstance/SDFLJFI</code></p>
+<h3 id='data-parameters-2'>Data Parameters</h3>
+<blockquote>
+<p>An example of data object has JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"formId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2348232343</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"studyId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">734515440</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"userRole"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Adjudicator"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"measurementValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;graphicList&gt;</span><span class="se">\r\n</span><span class="s2">  &lt;rectangle handle_pts_nb=</span><span class="se">\"</span><span class="s2">8</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">717242438</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">anotherWeasisQuestion</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Another Weasis Question</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">363.0012162490878</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">218.21624908781317</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">406.29968377523716</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">223.56774507419118</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">406.29968377523716</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">218.21624908781317</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">363.0012162490878</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">223.56774507419118</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">384.6504500121625</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">218.21624908781317</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">384.6504500121625</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">223.56774507419118</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">406.29968377523716</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">220.89199708100216</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">363.0012162490878</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">220.89199708100216</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;</span><span class="se">\/</span><span class="s2">pts&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">  &lt;</span><span class="se">\/</span><span class="s2">rectangle&gt;</span><span class="se">\r\n</span><span class="s2">  &lt;line handle_pts_nb=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">717242438</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">weasisLength</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Length of Something*</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Length : 323.1 pix</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">157.69837022622232</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">92.2128435903673</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">479.7611286791535</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">118.48382388713208</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;</span><span class="se">\/</span><span class="s2">pts&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">  &lt;</span><span class="se">\/</span><span class="s2">line&gt;</span><span class="se">\r\n</span><span class="s2">  &lt;threePointsCircle handle_pts_nb=</span><span class="se">\"</span><span class="s2">3</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">717242438</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">weasisArea</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Area of something?</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Area : 5,763.4 pix</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">148.9413767939674</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">166.16078812940887</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">188.34784723911457</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">230.378739965945</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">        &lt;pt x=</span><span class="se">\"</span><span class="s2">210.72683045487716</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">222.5947458039406</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;</span><span class="se">\/</span><span class="s2">pts&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">     &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"\/</span><span class="s2">&gt;</span><span class="se">\r\n</span><span class="s2">  &lt;</span><span class="se">\/</span><span class="s2">threePointsCircle&gt;</span><span class="se">\r\n</span><span class="s2">&lt;</span><span class="se">\/</span><span class="s2">graphicList&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"questioinAnswerMap"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">Area of something?</span><span class="se">\"</span><span class="s2"> : </span><span class="se">\"</span><span class="s2">Area : 5,763.4 pix</span><span class="se">\"</span><span class="s2">; </span><span class="se">\"</span><span class="s2">weasisLength</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Length : 323.1 pix</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phase"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"invalideInput"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
 <td>value</td>
 <td>text</td>
 <td>N/A</td>
@@ -411,9 +517,9 @@ curl <span class="o">=</span> <span class="s2">"http://demo01.agmednet.net/api/w
 </blockquote>
 
 <p>This endpoint retrieves a specific measurement record in weasis_measurement table by rest Id.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://example.com/weasismeasurements/{restId}</code></p>
-<h3 id='sample-call-2'>Sample call</h3>
+<h3 id='sample-call-3'>Sample call</h3>
 <p><code>Get https://demo01.agmednet.net/api/weasismeasurements/FBYVKDH4</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
@@ -527,9 +633,9 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/
   -H <span class="s2">"Authorization: cookie"</span>
 </code></pre>
 <p>This endpoint retrieves a speicific measurement record by given study id and user role name, based on user account id in the system.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET http://example.com/weasismeasurements/study/{studyId}/userrole/{userRole}</code></p>
-<h3 id='sample-call-3'>Sample Call</h3>
+<h3 id='sample-call-4'>Sample Call</h3>
 <p><code>GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
@@ -646,9 +752,9 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/
   -H <span class="s2">"Authorization: cookie"</span>
 </code></pre>
 <p>This endpoint retrieves a list of measurement records by given study id.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET http://example.com/weasismeasurements/study/{studyId}</code></p>
-<h3 id='sample-call-4'>Sample Call</h3>
+<h3 id='sample-call-5'>Sample Call</h3>
 <p><code>GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442</code></p>
 <h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
@@ -796,9 +902,9 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/
 <td>Invalid input</td>
 </tr>
 </tbody></table>
-<h2 id='get-if-a-user-is-weasis-privilege-user'>Get if A User Is Weasis Privilege User</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/study/{studyId}"</span>
+<h2 id='get-measurements-based-on-user-status'>Get Measurements Based on User Status</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/study/{studyId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}"</span>
 
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442"</span><span class="o">);</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/eventinstance/DSDIJL2"</span><span class="o">);</span>
 <span class="c1">// Connect to the web service and read the response.</span>
 <span class="n">HttpsURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
@@ -807,9 +913,186 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/
 <span class="c1">// Add coolies to the request</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Cookie"</span> <span class="o">,</span> <span class="n">cookie</span><span class="o">);</span>
 <span class="n">conn</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
-</code></pre><pre class="highlight shell tab-shell"><code>api <span class="o">=</span> <span class="s2">"weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}/userstatues"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>api <span class="o">=</span> <span class="s2">"weasismeasurements/study/{studyId}/userrole/{userRole}/userstatus"</span>
 
-curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues"</span>
+curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/eventinstance/DSDIJL2"</span>
+  -H <span class="s2">"Authorization: cookie"</span>
+</code></pre>
+<p>This endpoint retrieves a list of measurement records by given study id.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET http://example.com/weasismeasurements/study/{studyId}/userrole/{userRole}/eventinstance/{eventInstanceRestId}</code></p>
+<h3 id='sample-call-6'>Sample Call</h3>
+<p><code>GET https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/eventinstance/DSDIJL2</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>studyId</td>
+<td>integer</td>
+<td>The ID of the study</td>
+</tr>
+<tr>
+<td>userRole</td>
+<td>text</td>
+<td>The name of the user role</td>
+</tr>
+<tr>
+<td>eventInstanceRestId</td>
+<td>text</td>
+<td>The rest ID of the event instance</td>
+</tr>
+</tbody></table>
+<h3 id='success-response-3'>Success Response:</h3>
+<aside class="success">
+  This API call retrives a list of weasis measurement objects. 
+</aside>
+
+<p>Structure of weasis measurement object demonstrates below:  </p>
+
+<blockquote>
+<p>An example of a return obect has JSON structure as:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62968033</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"restId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X08MVTY9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;graphicList&gt;</span><span class="se">\n</span><span class="s2">   &lt;ellipse handle_pts_nb=</span><span class="se">\"</span><span class="s2">8</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">2000</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaComments</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Area of something?</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Area : 8,656 mm2</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">      &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">191.74529667149056</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">352.96092619392186</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">428.50361794500725</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">435.739507959479</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">428.50361794500725</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">352.96092619392186</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">191.74529667149056</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">435.739507959479</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">310.1244573082489</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">352.96092619392186</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">310.1244573082489</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">435.739507959479</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">428.50361794500725</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">394.35021707670046</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">191.74529667149056</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">394.35021707670046</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">      &lt;/pts&gt;</span><span class="se">\n</span><span class="s2">      &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">      &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">   &lt;/ellipse&gt;</span><span class="se">\n</span><span class="s2">   &lt;line handle_pts_nb=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">2000</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaReviewer</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Length of Something*</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Length : 292.7 mm</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">      &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">206.21707670043412</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">225.0303907380608</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">452.2373371924747</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">66.41968162083937</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">      &lt;/pts&gt;</span><span class="se">\n</span><span class="s2">      &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">      &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">   &lt;/line&gt;</span><span class="se">\n</span><span class="s2">&lt;/graphicList&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"studyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">59602037</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userAccountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userFirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userLastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reviewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reviewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"invalidInput"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63107033</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"restId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HZ4JX49G"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;graphicList&gt;</span><span class="se">\n</span><span class="s2">   &lt;line handle_pts_nb=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">2041002</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">committeeChair</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaReviewer</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Length of Something*</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Length : 5.3 mm</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">      &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">32.84515195369028</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">310.1244573082489</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">         &lt;pt x=</span><span class="se">\"</span><span class="s2">33.71345875542692</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">304.91461649782923</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">      &lt;/pts&gt;</span><span class="se">\n</span><span class="s2">      &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">      &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;</span><span class="se">\n</span><span class="s2">   &lt;/line&gt;</span><span class="se">\n</span><span class="s2">&lt;/graphicList&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"studyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">59602037</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userAccountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2041002</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userFirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userLastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Man"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"committeeChair"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"invalidInput"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61794033</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"restId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2M6YL16G"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;graphicList&gt;    &lt;line handle_pts_nb=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">4000</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaReviewer</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Length of Something*</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Length : 303.7 mm</span><span class="se">\"</span><span class="s2">&gt;       &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">112.43560057887117</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">40.37047756874096</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">433.13458755426916</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">137.62083936324169</span><span class="se">\"</span><span class="s2">/&gt;       &lt;/pts&gt;       &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;       &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;    &lt;/line&gt;    &lt;rectangle handle_pts_nb=</span><span class="se">\"</span><span class="s2">8</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">4000</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaComments</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Area of something?</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Area : 15,238 mm2</span><span class="se">\"</span><span class="s2">&gt;       &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">183.06222865412445</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">352.3820549927641</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">348.61939218523884</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">444.42257597684517</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">348.61939218523884</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">352.3820549927641</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">183.06222865412445</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">444.42257597684517</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">265.84081041968165</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">352.3820549927641</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">265.84081041968165</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">444.42257597684517</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">348.61939218523884</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">398.4023154848046</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">183.06222865412445</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">398.4023154848046</span><span class="se">\"</span><span class="s2">/&gt;       &lt;/pts&gt;       &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;       &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;    &lt;/rectangle&gt; &lt;/graphicList&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"studyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">59602037</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userAccountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userFirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adjudicator"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userLastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"One"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reviewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"invalidInput"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62512033</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"restId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DW77S8FZ"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;graphicList&gt;    &lt;line handle_pts_nb=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">5000</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaReviewer</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Length of Something*</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Length : 411 mm</span><span class="se">\"</span><span class="s2">&gt;       &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">63.814761215629495</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">18.952243125904488</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">459.18379160636755</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">131.2532561505065</span><span class="se">\"</span><span class="s2">/&gt;       &lt;/pts&gt;       &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;       &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;    &lt;/line&gt;    &lt;rectangle handle_pts_nb=</span><span class="se">\"</span><span class="s2">8</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">5000</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaComments</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Area of something?</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Area : 1,574.9 mm2</span><span class="se">\"</span><span class="s2">&gt;       &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">245.00144717800285</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">367.4327062228654</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">273.94500723589005</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">421.84659913169315</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">273.94500723589005</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">367.4327062228654</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">245.00144717800285</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">421.84659913169315</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">259.47322720694643</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">367.4327062228654</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">259.47322720694643</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">421.84659913169315</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">273.94500723589005</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">394.6396526772793</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">245.00144717800285</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">394.6396526772793</span><span class="se">\"</span><span class="s2">/&gt;       &lt;/pts&gt;       &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;       &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;    &lt;/rectangle&gt; &lt;/graphicList&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"studyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">59602037</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userAccountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userFirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adjudicator"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userLastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Two"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reviewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"invalidInput"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62990033</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"restId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QB3Q8QDY"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;graphicList&gt;    &lt;line handle_pts_nb=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">2041002</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaReviewer</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Length of Something*</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Length : 195 mm</span><span class="se">\"</span><span class="s2">&gt;       &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">299.99421128798843</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">189.14037626628075</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">418.08393632416784</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">34.00289435600579</span><span class="se">\"</span><span class="s2">/&gt;       &lt;/pts&gt;       &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;       &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;    &lt;/line&gt;    &lt;ellipse handle_pts_nb=</span><span class="se">\"</span><span class="s2">8</span><span class="se">\"</span><span class="s2"> thickness=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> fill=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> label_visible=</span><span class="se">\"</span><span class="s2">true</span><span class="se">\"</span><span class="s2"> class_id=</span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2"> user_id=</span><span class="se">\"</span><span class="s2">2041002</span><span class="se">\"</span><span class="s2"> user_role=</span><span class="se">\"</span><span class="s2">reviewer</span><span class="se">\"</span><span class="s2"> form_question_name=</span><span class="se">\"</span><span class="s2">cevaComments</span><span class="se">\"</span><span class="s2"> form_question=</span><span class="se">\"</span><span class="s2">Area of something?</span><span class="se">\"</span><span class="s2"> form_answer=</span><span class="se">\"</span><span class="s2">Area : 17,447.3 mm2</span><span class="se">\"</span><span class="s2">&gt;       &lt;pts class=</span><span class="se">\"</span><span class="s2">java.util.ArrayList</span><span class="se">\"</span><span class="s2">&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">169.16931982633864</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">302.5991316931983</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">320.2547033285094</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">449.63241678726484</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">320.2547033285094</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">302.5991316931983</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">169.16931982633864</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">449.63241678726484</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">244.712011577424</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">302.5991316931983</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">244.712011577424</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">449.63241678726484</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">320.2547033285094</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">376.11577424023153</span><span class="se">\"</span><span class="s2">/&gt;          &lt;pt x=</span><span class="se">\"</span><span class="s2">169.16931982633864</span><span class="se">\"</span><span class="s2"> y=</span><span class="se">\"</span><span class="s2">376.11577424023153</span><span class="se">\"</span><span class="s2">/&gt;       &lt;/pts&gt;       &lt;paint class=</span><span class="se">\"</span><span class="s2">java.awt.Color</span><span class="se">\"</span><span class="s2"> rgb=</span><span class="se">\"</span><span class="s2">ffff00</span><span class="se">\"</span><span class="s2">/&gt;       &lt;label offsetX=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2"> offsetY=</span><span class="se">\"</span><span class="s2">0.0</span><span class="se">\"</span><span class="s2">/&gt;    &lt;/ellipse&gt; &lt;/graphicList&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"studyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">59602037</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userAccountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2041002</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userFirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chair"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userLastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Man"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reviewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"invalidInput"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>N/A</td>
+<td>The ID of the measurement record</td>
+</tr>
+<tr>
+<td>restId</td>
+<td>text</td>
+<td>N/A</td>
+<td>The rest ID of the measurement record</td>
+</tr>
+<tr>
+<td>value</td>
+<td>text</td>
+<td>N/A</td>
+<td>The value of measurement</td>
+</tr>
+<tr>
+<td>studyId</td>
+<td>integer</td>
+<td>N/A</td>
+<td>The ID of the study</td>
+</tr>
+<tr>
+<td>userAccountId</td>
+<td>integer</td>
+<td>N/A</td>
+<td>The ID of the user account</td>
+</tr>
+<tr>
+<td>userFirstName</td>
+<td>text</td>
+<td>N/A</td>
+<td>The first name of the user account</td>
+</tr>
+<tr>
+<td>userLastName</td>
+<td>text</td>
+<td>N/A</td>
+<td>The last name of the user account</td>
+</tr>
+<tr>
+<td>userRole</td>
+<td>text</td>
+<td>N/A</td>
+<td>The user role name of the current user</td>
+</tr>
+<tr>
+<td>invalidInput</td>
+<td>text</td>
+<td>null</td>
+<td>Invalid input</td>
+</tr>
+</tbody></table>
+<h2 id='get-if-a-user-is-weasis-privilege-user'>Get if A User Is Weasis Privilege User</h2><pre class="highlight java tab-java"><code><span class="n">API</span> <span class="o">=</span> <span class="s">"weasismeasurements/study/{studyId}/userrole/{userRole}/userstatus"</span>
+
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/adjudicator/userstatus"</span><span class="o">);</span>
+<span class="c1">// Connect to the web service and read the response.</span>
+<span class="n">HttpsURLConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setRequestionMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+<span class="c1">// Add coolies to the request</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Cookie"</span> <span class="o">,</span> <span class="n">cookie</span><span class="o">);</span>
+<span class="n">conn</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+</code></pre><pre class="highlight shell tab-shell"><code>api <span class="o">=</span> <span class="s2">"weasismeasurements/study/{studyId}/userrole/{userRole}/userstatus"</span>
+
+curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/study/756788442/userrole/committeeChair/userstatus"</span>
   -H <span class="s2">"Authorization: cookie"</span>
 </code></pre>
 <blockquote>
@@ -818,11 +1101,11 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userro
 <pre class="highlight json tab-json"><code><span class="kc">true</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves the value of true or false if a user has permission to view all related measurements by given user role and event instance rest id. </p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET http://example.com/api/weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}/userstatue</code></p>
-<h3 id='sample-call-5'>Sample Call</h3>
+<h3 id='sample-call-7'>Sample Call</h3>
 <p><code>GET https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/userstatues</code></p>
-<h3 id='url-parameters-4'>URL Parameters</h3>
+<h3 id='url-parameters-5'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -841,7 +1124,7 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userro
 <td>The rest ID of the event instance</td>
 </tr>
 </tbody></table>
-<h3 id='success-response-3'>Success Response:</h3>
+<h3 id='success-response-4'>Success Response:</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -879,11 +1162,11 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userro
 <pre class="highlight json tab-json"><code><span class="kc">true</span><span class="w"> 
 </span></code></pre>
 <p>This endpoint retrieves the value of true or false if a user has permission to make measurements by given user role and event instance rest id.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET http://example.com/api/weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}/weasisuser</code></p>
-<h3 id='sample-call-6'>Sample Call</h3>
+<h3 id='sample-call-8'>Sample Call</h3>
 <p><code>GET https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL/weasisuser</code></p>
-<h3 id='url-parameters-5'>URL Parameters</h3>
+<h3 id='url-parameters-6'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -902,7 +1185,7 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userro
 <td>The rest ID of the event instance</td>
 </tr>
 </tbody></table>
-<h3 id='success-response-4'>Success Response:</h3>
+<h3 id='success-response-5'>Success Response:</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -948,9 +1231,9 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/eventi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves a list of form questions required Weasis to answer by given event instance rest id and user role. </p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>GET http://example.com/api/weasismeasurements/eventinstance/{eventInstanceRestId}/userrole/{userRole}</code></p>
-<h3 id='url-parameters-6'>URL Parameters</h3>
+<h3 id='url-parameters-7'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -969,7 +1252,7 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/eventi
 <td>The role name of the user role</td>
 </tr>
 </tbody></table>
-<h3 id='success-response-5'>Success Response</h3>
+<h3 id='success-response-6'>Success Response</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1024,11 +1307,11 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userro
   -H <span class="s2">"Authorization: cookie"</span>
 </code></pre>
 <p>This endpoint creats or updates form question result by given user account id, user role and event instance rest id.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST http://example.com/api/weasismeasurements/userrole/{userRole}/eventinstance/{eventInstanceRestId}</code></p>
-<h3 id='sample-call-7'>Sample Call</h3>
+<h3 id='sample-call-9'>Sample Call</h3>
 <p><code>POST https://demo01.agmednet.net/api/weasismeasurements/userrole/committeeChair/eventinstance/1Q45G9KL</code></p>
-<h3 id='url-parameters-7'>URL Parameters</h3>
+<h3 id='url-parameters-8'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1052,7 +1335,7 @@ curl <span class="s2">"https://demo01.agmednet.net/api/weasismeasurements/userro
 <td>The rest ID of the event instacne</td>
 </tr>
 </tbody></table>
-<h3 id='data-parameters-2'>Data Parameters</h3>
+<h3 id='data-parameters-3'>Data Parameters</h3>
 <blockquote>
 <p>An example of data object has JSON structure as:</p>
 </blockquote>
