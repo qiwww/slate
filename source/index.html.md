@@ -831,20 +831,32 @@ eventInstanceRestId | text | The rest ID of the event instacne
 ```json
 {
    "formId": 59621033,
-   "nameQuestionOrNameAnswerMap": {
-       "cevaComments": "Area: 1,547.7 mm2",
-       "cevaReviewer": "Length: 72.2 mm"
+   "questionMeasurementDTOList": [{
+       "questionName": "length",
+       "questionValue": "Length of Something*",
+       "answer": " ",
+       "thumbnailImage" : "",
+       "navigationLink": " ",
+       "invalidInput": " "
    },
+   {
+    "questionName": "Area",
+       "questionValue": "Area of something",
+       "answer": " ",
+       "thumbnailImage" : "",
+       "navigationLink": " ",
+       "invalidInput": " "
+
+   }],
    "phase": 1,
    "invalidInput": null
 }
-ss
 ```
 
 Parameter | Type | Default | Description
 --------- | ---- | ------- | -----------
 formId| integer | N/A | The ID of the form
-nameQuestionOrNameAnswerMap | Map<text, text> | N/A | The map between form question name and form question answer
+questionMeasurementDTOList | List of FormQuestionMeasurementDTO | N/A | The list objects contains form question name, form question answer, thumbnail image and navigation link to Hiruko Viewer 
 phase | integer | 0 | The pase of the form
 invalidInput | text | null | Invalid input 
 
